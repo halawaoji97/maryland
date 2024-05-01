@@ -13,7 +13,7 @@
         @logout="handleLogout"
       />
       <main class="flex-1 pb-8">
-        <div class="p-0 w-full mx-auto mt-36 py-2 px-6">
+        <div class="p-0 w-full mx-auto mt-6 lg:mt-32 xl:mt-36 2xl:mt-44 py-2 px-6">
           <router-view v-slot="{ Component }">
             <transition name="fade" mode="out-in">
               <component :is="Component" />

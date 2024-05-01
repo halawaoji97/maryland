@@ -95,6 +95,8 @@ import IconComment from '@/components/icons/IconComment.vue'
 import IconShuffle from '@/components/icons/IconShuffle.vue'
 import IconArrow from '@/components/icons/IconArrow.vue'
 import { cardData } from '@/constants/dashboardData.js'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const recentActivities = [
   {
@@ -158,6 +160,18 @@ const recentAnnouncment = [
     description: 'Maryland EXCELS FAP Phase two Development',
   },
 ]
+
+const authData = ref(null)
+const router = useRouter()
+
+onMounted(() => {
+  const localAuthData = localStorage.getItem('authData')
+  if (localAuthData) {
+    authData.value = JSON.parse(localAuthData)
+  } else {
+    router.push('/auth/login')
+  }
+})
 </script>
 
 <style scoped>
