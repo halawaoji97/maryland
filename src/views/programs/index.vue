@@ -43,7 +43,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="border rounded" v-for="item in filteredPrograms" :key="item.id">
           <div class="flex items-center pt-2 px-6">
-            <div class="flex items-center w-full">
+            <div class="flex items-center w-full min-h-[80px]">
               <img src="@/assets/images/QR4.svg" alt="" />
               <div class="flex items-start flex-col ml-3 w-full">
                 <span class="text-primary-blue text-sm mb-1 block">{{ item.type }}</span>
@@ -72,8 +72,16 @@
             <RouterLink
               class="flex items-center justify-center text-primary-blue py-3 px-4 border-t border-l w-full"
               :to="`/programs/edit/${item.id}`"
+              v-if="authData && authData.role === 'Provider'"
             >
               <IconEdit class="mr-1" />Edit Program</RouterLink
+            >
+            <RouterLink
+              class="flex items-center justify-center text-primary-blue py-3 px-4 border-t border-l w-full"
+              :to="`/programs/edit-program-access/${item.id}`"
+              v-if="authData && authData.role === 'Administrator'"
+            >
+              <IconEdit class="mr-1" />Edit Access</RouterLink
             >
           </div>
         </div>
@@ -91,7 +99,7 @@ import IconEdit from '@/components/icons/IconEdit.vue'
 import IconViewDetail from '@/components/icons/IconViewDetail.vue'
 import Pagination from '@/components/ui/Pagination.vue'
 import InputSearch from '@/components/ui/InputSearch.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { programs } from '@/constants/programs.js'
 
 const selectedLimit = ref(10)
@@ -119,4 +127,12 @@ const handleSearch = (keyword) => {
     )
   })
 }
+
+const authData = ref(null)
+onMounted(() => {
+  const localAuthData = localStorage.getItem('authData')
+  if (localAuthData) {
+    authData.value = JSON.parse(localAuthData)
+  }
+})
 </script>

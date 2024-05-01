@@ -39,9 +39,9 @@
                   class="hidden ml-3 text-white text-sm font-medium lg:flex flex-col items-start justify-start"
                 >
                   <span>Welcome Hopkins,</span>
-                  <span>Provider</span>
+                  <span v-if="authData">{{ authData.role }}</span>
                 </div>
-                <IconChevron class="w-4 h-4 rotate-180 ml-2" />
+                <IconChevron class="w-4 h-4 text-[#E2E8F0] rotate-180 ml-2" />
               </MenuButton>
             </div>
             <transition
@@ -69,7 +69,7 @@
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <router-link
-                    to="/on-progress"
+                    to="/auth/login"
                     :class="[
                       active
                         ? 'bg-sky-primary text-white-primary'
@@ -85,11 +85,19 @@
         </div>
       </div>
     </div>
-    <div class="absolute top-0 text-white">
-      <img src="@/assets/images/bg-header.svg" alt="" class="h-full" />
+    <div class="absolute top-0 text-white hidden lg:block">
+      <img
+        src="@/assets/images/bg-header.svg"
+        alt=""
+        class=""
+        v-if="authData && authData.role === 'Provider'"
+      />
+      <img src="@/assets/images/bg-header-admin.svg" alt="" class="" v-else />
       <div class="absolute top-[120px] left-5">
-        <h1 class="text-3xl font-semibold">Good afternoon, Hopkins (Provider)👋</h1>
-        <p class="">Here is what’s happening with your projects today:</p>
+        <h1 class="text-3xl font-semibold" v-if="authData">
+          Good afternoon, {{ authData.name }} ({{ authData.role }})👋
+        </h1>
+        <p class="">Here is what's happening with your projects today:</p>
       </div>
     </div>
   </header>
@@ -98,4 +106,12 @@
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import IconChevron from '../icons/IconChevron.vue'
+import { ref } from 'vue'
+
+const authData = ref(null)
+
+const localAuthData = localStorage.getItem('authData')
+if (localAuthData) {
+  authData.value = JSON.parse(localAuthData)
+}
 </script>

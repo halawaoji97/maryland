@@ -13,53 +13,92 @@ export const navigatios = [
     name: 'Dashboard',
     href:'/',
     icon: IconDashboard,
-    hasChevronDown: true
+    hasChevronDown: true,
+    role: ['Administrator', 'Provider']
   },
   {
     name: 'My Announcements',
     href:'/announcements',
     icon: IconAnnouncment,
-    hasChevronDown: true
+    hasChevronDown: true,
+    role: ['Administrator', 'Provider']
   },
   {
     name: 'Search Programs',
     href:'/programs',
     icon: IconSearchPrograms,
-    hasChevronDown: true
+    hasChevronDown: true,
+    role: ['Administrator', 'Provider']
   },
   {
     name: 'My Programs',
     href:'/programs/my-programs',
+    href:'/my-programs',
     icon: IconMyPrograms,
-    hasChevronDown: true
+    hasChevronDown: true,
+    role: [  'Provider']
+  },
+  {
+    name: 'My Programs',
+    href:'/verification-programs',
+    icon: IconMyPrograms,
+    hasChevronDown: true,
+     role: ['Administrator', ]
+  },
+  {
+    name: 'Request History',
+    href:'/request-history',
+    icon: IconMyPrograms,
+    hasChevronDown: true,
+     role: ['Administrator', ]
   },
   {
     name: 'Reports',
     href:'/reports',
     icon: IconReports,
-    hasChevronDown: true
+    hasChevronDown: true,
+    role: ['Administrator', 'Provider']
   },
   {
     name: 'Testimonials',
     href:'/testimonials',
     icon: IconTestimonial,
-    hasChevronDown: true
+    hasChevronDown: true,
+    role: ['Administrator', 'Provider']
   },
   {
     name: 'Messages',
     href:'/messages',
     icon: IconMessages,
-    hasChevronDown: false
+    hasChevronDown: false,
+    role: ['Administrator', 'Provider']
   },
   {
     name: 'Inbox',
     href:'/inbox',
     icon: IconInbox,
-    hasChevronDown: false
-  }, {
+    hasChevronDown: false,
+    role: ['Administrator', 'Provider']
+  }, 
+  {
     name: 'Calendar',
     href:'/calendar',
     icon: IconCalendar,
-    hasChevronDown: false
+    hasChevronDown: false,
+    role: ['Administrator', 'Provider']
+  },
+  {
+    name: 'Settings',
+    href:'/settings',
+    icon: IconCalendar,
+    hasChevronDown: false,
+     role: ['Administrator',]
+  },
+  {
+    name: 'Program Management',
+    href:'/program-management',
+    icon: IconCalendar,
+    hasChevronDown: false,
+     role: ['Administrator',]
   },
 ]

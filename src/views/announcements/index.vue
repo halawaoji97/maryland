@@ -1,6 +1,15 @@
 <template>
   <section>
-    <h2 class="text-primary-dark-blue text-3xl my-5 font-bold">Announcements ✨</h2>
+    <div class="lg:flex justify-between items-center my-5">
+      <h2 class="text-primary-dark-blue text-3xl font-bold">Announcements ✨</h2>
+      <button
+        v-if="authData.role === 'Administrator'"
+        class="px-5 py-2.5 flex bg-primary-blue rounded shadow-lg text-white font-medium"
+        type="button"
+      >
+        + Add Entry
+      </button>
+    </div>
 
     <hr class="flex w-full border-b-1 my-6 border-[#64748B]" />
 
@@ -75,9 +84,19 @@
             </p>
             <hr class="flex w-full border-b-1 my-6 border-[#E2E8F0]" />
           </div>
-          <button type="button" class="p-1 bg-white rounded border outline-none mt-4">
-            <IconTrash />
-          </button>
+
+          <div class="flex items-center space-x-2">
+            <button
+              type="button"
+              class="p-1.5 bg-white rounded border outline-none mt-4"
+              v-if="authData.role === 'Administrator'"
+            >
+              <IconEdit />
+            </button>
+            <button type="button" class="p-1 bg-white rounded border outline-none mt-4">
+              <IconTrash />
+            </button>
+          </div>
         </div>
       </div>
       <div class="flex justify-end items-end mt-5">
@@ -100,12 +119,9 @@
 
 <script setup>
 import IconArrow from '@/components/icons/IconArrow.vue'
-import IconComment from '@/components/icons/IconComment.vue'
-import IconOption from '@/components/icons/IconOption.vue'
-import IconEdit from '@/components/icons/IconEdit.vue'
-import IconViewDetail from '@/components/icons/IconViewDetail.vue'
-import { cardData } from '@/constants/dashboardData.js'
 import IconTrash from '../../components/icons/IconTrash.vue'
+import { ref } from 'vue'
+import IconEdit from '@/components/icons/IconEdit.vue'
 
 const announcements = [
   {
@@ -178,5 +194,12 @@ const typeClasses = (type) => {
   }
 
   return 'bg-[#D1FAE5] text-[#059669]'
+}
+
+const authData = ref(null)
+
+const localAuthData = localStorage.getItem('authData')
+if (localAuthData) {
+  authData.value = JSON.parse(localAuthData)
 }
 </script>

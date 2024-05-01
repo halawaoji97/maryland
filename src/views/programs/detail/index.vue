@@ -143,11 +143,6 @@
 
 <script setup>
 import IconCheckList from '@/components/icons/IconCheckList.vue'
-import IconComment from '@/components/icons/IconComment.vue'
-import IconOption from '@/components/icons/IconOption.vue'
-import IconEdit from '@/components/icons/IconEdit.vue'
-import IconViewDetail from '@/components/icons/IconViewDetail.vue'
-import { cardData } from '@/constants/dashboardData.js'
 
 const participants = [
   {
